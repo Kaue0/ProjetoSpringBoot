@@ -1,14 +1,15 @@
-package com.example.api.post;
+package com.example.api.domain.post;
 
-import com.example.api.post.dto.CriarPostData;
-import com.example.api.post.dto.UpdatePostData;
-import com.example.api.user.User;
+import com.example.api.domain.post.dto.CreatePostData;
+import com.example.api.domain.post.dto.UpdatePostData;
+import com.example.api.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Table(name = "Posts")
@@ -19,8 +20,6 @@ import java.util.Date;
 @EqualsAndHashCode(of = "post_id")
 public class Post {
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //private User user;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long post_id;
@@ -33,8 +32,10 @@ public class Post {
     private Date createdAt;
     private Date updatedAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
-    public Post(CriarPostData data) {
+    public Post(CreatePostData data, User user) {
         this.title = data.title();
         this.description = data.description();
         this.photoLink = data.photoLink();
@@ -43,6 +44,9 @@ public class Post {
         this.deleted = false;
         this.createdAt = new Date();
         this.updatedAt = new Date();
+        this.user = user;
+
+        this.user.getPosts().add(this);
     }
 
     public void setPost_id(Long postId) {
@@ -71,5 +75,11 @@ public class Post {
 
     public void delete() {
         this.deleted = true;
+    }
+
+    public void changeVisualization() {
+        this.privated = !this.privated;
+
+        this.updatedAt = new Date();
     }
 }

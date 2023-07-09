@@ -1,6 +1,6 @@
-package com.example.api.post.dto;
+package com.example.api.domain.post.dto;
 
-import com.example.api.post.Post;
+import com.example.api.domain.post.Post;
 
 public record ListPostData(Long postid, String title, String description, String photoLink, String videoLink) {
 

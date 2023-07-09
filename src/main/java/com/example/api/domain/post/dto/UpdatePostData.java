@@ -1,4 +1,4 @@
-package com.example.api.post.dto;
+package com.example.api.domain.post.dto;
 
 import jakarta.validation.constraints.NotNull;
 

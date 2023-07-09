@@ -1,8 +1,8 @@
-package com.example.api.post.dto;
+package com.example.api.domain.post.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record CriarPostData(
+public record CreatePostData(
         @NotBlank(message = "Insira um titulo")
         String title,
         @NotBlank(message = "Insira uma descrição")

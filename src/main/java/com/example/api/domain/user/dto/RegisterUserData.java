@@ -1,4 +1,4 @@
-package com.example.api.user.dto;
+package com.example.api.domain.user.dto;
 
 import jakarta.validation.constraints.*;
 
@@ -14,7 +14,7 @@ public record RegisterUserData(
         @Email
         String email,
         @NotBlank(message = "Sua senha não pode ser vazia")
-        @Size(min = 5, max = 40)
+        @Size(min = 5, max = 255)
         String password,
         String profileLink) {
 }

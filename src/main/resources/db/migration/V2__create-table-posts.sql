@@ -9,6 +9,7 @@ create table posts(
     video_link varchar(500),
     privated boolean,
     deleted boolean not null default false,
+    user_id bigint,
 
     PRIMARY KEY(post_id)
 
